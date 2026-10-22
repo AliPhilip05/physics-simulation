@@ -19,7 +19,7 @@ fn window_conf() -> Conf {
 #[macroquad::main(window_conf)]
 async fn main() {
     let mut simulation = Simulation::default();
-       loop {
+    loop {
         if is_key_pressed(KeyCode::Space) {
             simulation.paused = !simulation.paused;
         }
@@ -28,13 +28,12 @@ async fn main() {
         }
         if !simulation.paused {
             let clock = f64::from(get_frame_time());
-            simulation.elapsed += clock;
+            simulation.step(clock);
         }
         if is_key_pressed(KeyCode::Escape) {
             break;
         }
 
-        // Your first exercise adds input and state updates here.
         view::draw(&simulation);
         next_frame().await;
     }

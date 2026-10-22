@@ -24,20 +24,20 @@ pub fn draw(simulation: &Simulation) {
     draw_text(&milestone_message, 24.0, 70.0, 22.0, GRAY);
     draw_text(
         format!("R / R0 = {:.2}", simulation.star.radius),
-        24.0,     
+        24.0,
         100.0,
         22.0,
         GOLD,
     );
     draw_text(
-        format!("TIME ELAPSED: {:.2}", simulation.elapsed),
+        format!("TIME ELAPSED IN SECONDS: {:.2}", simulation.elapsed),
         24.0,
         124.0,
         22.0,
         BLUE,
     );
     draw_text(
-        "Esc: close | Resize the window to check scaling",
+        "Space: pause/resume | R: reset | Esc: close | Resize: check scaling",
         24.0,
         screen_height() - 24.0,
         20.0,

@@ -31,6 +31,9 @@ Each completed checkpoint keeps `cargo run` working. After the first successful
 build, retain `Cargo.lock` and verify with `cargo run --locked`. Avoid starting
 several unfinished features at once. The schedule is a guide, not a deadline.
 
+Session records: [October 22, 2026](sessions/2026-10-22.md). The first state and
+clock checkpoint is complete; milestone 1 continues with fixed timesteps.
+
 ## Milestones
 
 | Week | Checkpoints you implement | Visible result | Evidence before moving on |
@@ -80,8 +83,8 @@ when its milestone begins.
 ## Code boundaries
 
 ```text
-src/main.rs        Window setup and application loop; input handling comes next
-src/simulation.rs  Physical state; later owns time evolution, units and shells
+src/main.rs        Window setup, input, frame timing and the application loop
+src/simulation.rs  State, defaults and elapsed-time updates; gravity comes later
 src/view.rs        Draws state and converts model distances to pixels
 docs/              Milestones, exercises, and reference material
 README.md          Your explanation of how to run and interpret the project

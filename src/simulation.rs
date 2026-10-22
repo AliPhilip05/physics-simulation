@@ -26,3 +26,8 @@ impl Default for Simulation {
     }
 }
 
+impl Simulation {
+    pub fn step(&mut self, dt: f64) {
+        self.elapsed += dt;
+    }
+}
