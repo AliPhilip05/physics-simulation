@@ -1,0 +1,9 @@
+[package]
+name = "stellar-collapse"
+version = "0.1.0"
+edition = "2024"
+description = "A guided Rust project exploring spherical gravitational collapse"
+publish = false
+
+[dependencies]
+macroquad = { version = "=0.4.16", default-features = false }
