@@ -22,8 +22,8 @@ route to that stage without immediately writing an Einstein-equation solver.
 ## How we work
 
 1. Discuss one physical question, its assumptions, and the equations.
-2. Agree on a small interface and observable acceptance criteria.
-3. You implement the exercise and write your README notes.
+2. Agree on a coherent assignment and observable acceptance criteria.
+3. You research the resources, choose interfaces, implement, and write your notes.
 4. I review correctness, units, Rust structure, and numerical behavior.
 5. You make revisions, run the window, and explain what the evidence shows.
 
@@ -31,8 +31,15 @@ Each completed checkpoint keeps `cargo run` working. After the first successful
 build, retain `Cargo.lock` and verify with `cargo run --locked`. Avoid starting
 several unfinished features at once. The schedule is a guide, not a deadline.
 
-Session records: [October 22, 2026](sessions/2026-10-22.md). The first state and
-clock checkpoint is complete; milestone 1 continues with fixed timesteps.
+Session records: [October 22, 2026](sessions/2026-10-22.md) and
+[October 23, 2026](sessions/2026-10-23.md). Milestone 1 is complete, including
+the fixed-timestep rendering-rate comparison. Milestone 2 has normalized state,
+gravity, and a one-step Verlet candidate; guarded acceptance, stopping, and
+motion wiring remain in progress. Continue [Assignment 2](assignments/02-radial-collapse.md).
+
+Assignments grow in scope and implementation guidance decreases as familiarity
+increases. By the final stage, guidance consists of requirements and resources;
+see the mentoring agreement in `AGENTS.md`.
 
 ## Milestones
 
@@ -83,9 +90,9 @@ when its milestone begins.
 ## Code boundaries
 
 ```text
-src/main.rs        Window setup, input, frame timing and the application loop
-src/simulation.rs  State, defaults and elapsed-time updates; gravity comes later
-src/view.rs        Draws state and converts model distances to pixels
+src/main.rs        Window, input, fixed-step accumulator and application loop
+src/simulation.rs  State, gravity, unchecked Verlet candidate and clock-only step
+src/view.rs        Draws state and diagnostics; converts model radius to pixels
 docs/              Milestones, exercises, and reference material
 README.md          Your explanation of how to run and interpret the project
 ```
