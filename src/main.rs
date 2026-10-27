@@ -25,7 +25,7 @@ async fn main() {
     let mut accumulator: f64 = 0.0;
     loop {
         let mut steps_this_frame: u32 = 0;
-        if is_key_pressed(KeyCode::Space) {
+        if is_key_pressed(KeyCode::Space) && simulation.status.is_none() {
             simulation.paused = !simulation.paused;
         }
         if is_key_pressed(KeyCode::R) {
@@ -35,12 +35,18 @@ async fn main() {
         if !simulation.paused {
             accumulator += f64::from(get_frame_time());
             while accumulator >= FIXED_DT {
-                steps_this_frame += 1;
-                simulation.step(FIXED_DT);
-                accumulator -= FIXED_DT;
+                match simulation.step(FIXED_DT) {
+                    Ok(()) => {
+                        steps_this_frame += 1;
+                        accumulator -= FIXED_DT;
+                    }
+                    Err(_reason) => {
+                        simulation.paused = true;
+                        break;
+                    }
+                }
             }
         }
-
         if is_key_pressed(KeyCode::Escape) {
             break;
         }

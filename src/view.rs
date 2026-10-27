@@ -8,14 +8,11 @@ pub fn draw(simulation: &Simulation, steps_this_frame: u32) {
     let center = vec2(screen_width() * 0.5, screen_height() * 0.52);
     let pixels_per_unit = screen_width().min(screen_height()) * 0.24;
     let radius_px = simulation.star.radius as f32 * pixels_per_unit;
-    let milestone_message: String = {
-        if simulation.paused {
-            String::from("PAUSED")
-        } else {
-            String::from("RUNNING")
-        }
+    let milestone_message = match simulation.status {
+        None if simulation.paused => String::from("PAUSED"),
+        None => String::from("RUNNING"),
+        Some(reason) => format!("STOPPED: {reason}"),
     };
-
     draw_circle(center.x, center.y, radius_px, ORANGE);
     draw_circle_lines(center.x, center.y, radius_px, 2.0, GOLD);
     draw_circle(center.x, center.y, 3.0, WHITE);
@@ -62,6 +59,33 @@ pub fn draw(simulation: &Simulation, steps_this_frame: u32) {
         192.0,
         22.0,
         GOLD,
+    );
+    draw_text(
+        format!(
+            "SPECIFIC ENERGY (normalized): {:.8}",
+            simulation.specific_energy()
+        ),
+        24.0,
+        216.0,
+        22.0,
+        GOLD,
+    );
+    draw_text(
+        format!(
+            "ABSOLUTE ENERGY ERROR: {:.3e}",
+            simulation.absolute_energy_error()
+        ),
+        24.0,
+        240.0,
+        22.0,
+        GOLD,
+    );
+    draw_text(
+        "Newtonian pressureless model | cutoff r/R0 = 0.25 (numerical only)",
+        24.0,
+        264.0,
+        18.0,
+        GRAY,
     );
     draw_text(
         "Space: pause/resume | R: reset | Esc: close | Resize: check scaling",
