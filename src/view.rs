@@ -103,7 +103,7 @@ pub fn draw(simulation: &Simulation, steps_this_frame: u32, convergence: &[(f64,
     draw_trajectory_plot(simulation, convergence);
 
     draw_text(
-        "Space: pause/resume | R: reset | Esc: close",
+        "2: shells | 3: particles | 4: collapse | 5: black hole | Space: pause | R: reset | Esc: close",
         24.0,
         height - 20.0,
         18.0,
